@@ -28,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: queue-api-windows-exe
-        path: dist/queue_api_win.exe
+        path: dist
 
   # ---------------------------------
   # Mac ビルドジョブを追加
@@ -58,4 +58,4 @@ jobs:
       with:
         name: queue-api-macos-exe
         # Macでは拡張子なしのファイルが生成される
-        path: dist/queue_api_mac
+        path: dist
