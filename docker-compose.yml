@@ -1,0 +1,21 @@
+services:
+  pqmaster_api:
+    build: .
+    container_name: pqmaster_api_container
+    
+    ports:
+      - "8000:8000"
+      
+    volumes:
+      # 開発コードの同期は引き続きバインドマウント（開発の即時反映のため）
+      - .:/app
+      # DBファイル専用のディレクトリを名前付きボリュームでマウント
+      # /app/data にマウントすることで、main.pyのパス設定は維持される
+      - db_data:/app/data 
+
+    environment:
+      - DATABASE_FILE=queue_data.db
+
+volumes:
+  db_data:
+    # ローカルPCのファイルシステムに依存しない永続化を実現

@@ -13,14 +13,25 @@ from starlette.requests import Request
 from starlette.responses import HTMLResponse
 
 # --- DB設定 ---
+# データベースファイルをカレントディレクトリではなく、/data/ ディレクトリ内に指定
+# Docker Composeで永続化のため、パスを /app/data/queue_data.db に変更
+DATABASE_DIR = "data"
 DATABASE_FILE = "queue_data.db"
-SQLALCHEMY_DATABASE_URL = f"sqlite:///{DATABASE_FILE}"
+# 💡 パスを結合
+DB_FULL_PATH = os.path.join(DATABASE_DIR, DATABASE_FILE)
+
+# SQLite接続文字列。ファイルパスが変更になった
+SQLALCHEMY_DATABASE_URL = f"sqlite:///{DB_FULL_PATH}"
 
 # スレッドセーフのためにチェックアローンにする
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, 
     connect_args={"check_same_thread": False} 
 )
+
+if not os.path.exists(DATABASE_DIR):
+    os.makedirs(DATABASE_DIR)
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
