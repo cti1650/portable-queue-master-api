@@ -1,4 +1,4 @@
-# PQMaster (Portable Queue Master) - 開発者チートシート
+# PQMaster (Portable Queue Master)
 
 ## 📌 概要
 
@@ -35,3 +35,7 @@
 * **DB**: SQLite (排他制御は `threading.Lock` で実装)
 * **実行**: PyInstaller (`.exe`, `.mac`)
 * **開発**: Docker Compose (Named Volume使用)
+
+## 注意事項
+- Macの実行ファイルを起動する前に格納場所でコマンド実行が必要
+  `xattr -r -d com.apple.quarantine ./pqmaster_mac`
