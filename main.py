@@ -1,5 +1,11 @@
 import os
 import sys
+
+# PyInstallerでフリーズされた環境の場合、テンポラリディレクトリをsys.pathに追加する
+if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+    # sys._MEIPASS はバンドルされたファイルのルート
+    sys.path.insert(0, sys._MEIPASS)
+
 import threading
 from datetime import datetime
 from typing import List, Optional
@@ -12,11 +18,6 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.exc import IntegrityError
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
-
-# PyInstallerでフリーズされた環境の場合、テンポラリディレクトリをsys.pathに追加する
-if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
-    # sys._MEIPASS はバンドルされたファイルのルート
-    sys.path.insert(0, sys._MEIPASS)
 
 def resource_path(relative_path):
     """
