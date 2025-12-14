@@ -1,4 +1,4 @@
-# PQMaster (Portable Queue Master)
+# PQMaster (Portable Queue Master) 未完成
 
 ## 📌 概要
 
@@ -37,5 +37,7 @@
 * **開発**: Docker Compose (Named Volume使用)
 
 ## 注意事項
-- Macの実行ファイルを起動する前に格納場所でコマンド実行が必要
+- Macの実行ファイルを起動する前に格納場所でコマンド実行でGatekeeperブロックの解除が必要
   `xattr -r -d com.apple.quarantine ./pqmaster_mac`
+- Mac環境での起動を試みたが、以下のエラーが発生して起動しなかったため、一旦作業を保留する
+  `ERROR: Error loading ASGI app. Could not import module "main".`
