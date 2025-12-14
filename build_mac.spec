@@ -21,7 +21,6 @@ hiddenimports.extend(c[2])
 
 # 💡 staticフォルダ全体を同梱する
 datas.append(('static', 'static'))
-datas.append(('queue_data.db', '.')) # DBファイルも同梱
 
 block_cipher = None
 
