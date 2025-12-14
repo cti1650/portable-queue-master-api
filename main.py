@@ -13,16 +13,18 @@ from sqlalchemy.exc import IntegrityError
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
 
+# PyInstallerでフリーズされた環境の場合、テンポラリディレクトリをsys.pathに追加する
+if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+    # sys._MEIPASS はバンドルされたファイルのルート
+    sys.path.insert(0, sys._MEIPASS)
+
 def resource_path(relative_path):
     """
     Get absolute path to resource, works for dev and for PyInstaller
     """
-    # PyInstallerで実行されているかどうかをチェック
     if getattr(sys, 'frozen', False):
-        # PyInstaller環境の場合、ベースパスはテンポラリフォルダ内の実行ファイルパスになる
         base_path = sys._MEIPASS
     else:
-        # 開発環境の場合、ベースパスはスクリプトのあるディレクトリ
         base_path = os.path.dirname(os.path.abspath(__file__))
     
     return os.path.join(base_path, relative_path)
