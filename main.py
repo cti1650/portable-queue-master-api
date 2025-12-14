@@ -1,4 +1,5 @@
 import os
+import sys
 import threading
 from datetime import datetime
 from typing import List, Optional
@@ -11,6 +12,20 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.exc import IntegrityError
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
+
+def resource_path(relative_path):
+    """
+    Get absolute path to resource, works for dev and for PyInstaller
+    """
+    # PyInstallerで実行されているかどうかをチェック
+    if getattr(sys, 'frozen', False):
+        # PyInstaller環境の場合、ベースパスはテンポラリフォルダ内の実行ファイルパスになる
+        base_path = sys._MEIPASS
+    else:
+        # 開発環境の場合、ベースパスはスクリプトのあるディレクトリ
+        base_path = os.path.dirname(os.path.abspath(__file__))
+    
+    return os.path.join(base_path, relative_path)
 
 # --- DB設定 ---
 # データベースファイルをカレントディレクトリではなく、/data/ ディレクトリ内に指定
@@ -75,7 +90,8 @@ class QueueEntryResponse(QueueBase):
 app = FastAPI(title="Portable Queue Master API", version="1.0.0")
 
 # 💡 静的ファイルディレクトリの公開
-app.mount("/static", StaticFiles(directory="static"), name="static")
+STATIC_DIR = resource_path("static")
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 # DBセッション依存性注入ヘルパー
 def get_db():
