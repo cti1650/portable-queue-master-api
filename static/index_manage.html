@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>順番待ち管理画面</title>
+    <style>
+        /* 超簡易的なCSS */
+        body { font-family: 'Arial', sans-serif; padding: 20px; background-color: #f4f4f9; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+        .queue-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .queue-table th, .queue-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        .queue-table th { background-color: #e8e8e8; }
+        .status-waiting { background-color: #f9e9a5; }
+        .status-serving { background-color: #a5e5f9; }
+        .status-completed { background-color: #a5f9b4; color: #555; }
+        .status-cancelled { background-color: #f9a5a5; color: #555; }
+        .action-btn { padding: 8px 12px; margin: 2px; border: none; border-radius: 4px; cursor: pointer; color: white; transition: background-color 0.3s; }
+        .btn-call { background-color: #3498db; } /* 対応開始 */
+        .btn-complete { background-color: #2ecc71; } /* 完了 */
+        .btn-cancel { background-color: #e74c3c; } /* キャンセル */
+        .btn-refresh { float: right; padding: 10px 15px; background-color: #9b59b6; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>📋 順番待ち管理リスト</h1>
+    <button class="btn-refresh" onclick="updateQueueList()">手動更新</button>
+    <div id="loading" style="text-align: center; margin-top: 20px;">
+        データを読み込み中...
+    </div>
+    <table class="queue-table" id="queueTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>番号</th>
+                <th>人数</th>
+                <th>席種</th>
+                <th>受付時間</th>
+                <th>ステータス</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="queueListBody">
+            </tbody>
+    </table>
+
+    <script src="/static/app_manage.js"></script>
+</body>
+</html>

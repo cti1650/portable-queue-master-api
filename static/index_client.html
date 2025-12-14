@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>順番待ち発券機</title>
+    <style>
+        /* 超簡易的なCSS */
+        body { font-family: 'Arial', sans-serif; text-align: center; margin-top: 50px; background-color: #f0f2f5; }
+        .container { max-width: 400px; margin: 0 auto; padding: 30px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        h1 { color: #34495e; margin-bottom: 30px; }
+        label { display: block; margin-top: 15px; font-weight: bold; color: #555; text-align: left; }
+        input[type="number"], select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        button { 
+            width: 100%; padding: 15px; margin-top: 30px; 
+            background-color: #2ecc71; color: white; border: none; 
+            border-radius: 6px; font-size: 1.2em; cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover { background-color: #27ad60; }
+        /* 結果表示エリア */
+        #result { margin-top: 30px; padding: 15px; background-color: #ecf0f1; border-radius: 6px; display: none; }
+        #result .number { font-size: 3em; color: #e74c3c; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>発券フォーム</h1>
+        <div id="queueForm">
+            <label for="partySize">人数</label>
+            <input type="number" id="partySize" value="2" min="1" required>
+
+            <label for="seatType">席種</label>
+            <select id="seatType" required>
+                <option value="Table">テーブル席</option>
+                <option value="Counter">カウンター席</option>
+                <option value="Any">どちらでも</option>
+            </select>
+
+            <button onclick="submitQueue()">整理番号を発券する</button>
+        </div>
+
+        <div id="result">
+            <p>発券が完了しました！あなたの整理番号は...</p>
+            <div id="queueNumberDisplay" class="number"></div>
+            <p>※待ち受け画面をご確認ください</p>
+            <button onclick="resetForm()">続けて発券する</button>
+        </div>
+        
+        <p id="errorMessage" style="color: red; margin-top: 15px; display: none;"></p>
+    </div>
+
+    <script src="/static/app_client.js"></script>
+</body>
+</html>

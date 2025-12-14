@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>順番待ち表示画面</title>
+    <link rel="stylesheet" href="/static/style.css"> <style>
+        /* 超簡易的なCSS (本来は style.css に書く) */
+        body { font-family: 'Arial', sans-serif; text-align: center; margin-top: 50px; background-color: #f4f4f9; }
+        h1 { color: #2c3e50; }
+        .display-box { margin: 30px auto; padding: 20px; width: 80%; max-width: 600px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #ffffff; }
+        .waiting-count, .current-serving { margin-bottom: 20px; }
+        .number-large { font-size: 5em; font-weight: bold; color: #e74c3c; margin: 10px 0; }
+        .number-small { font-size: 2em; color: #34495e; }
+        .label { font-size: 1.2em; color: #7f8c8d; }
+    </style>
+</head>
+<body>
+    <h1>🌟 現在の順番待ち状況 🌟</h1>
+
+    <div class="display-box">
+        <div class="current-serving">
+            <div class="label">ただいま対応中の番号</div>
+            <div id="servingNumber" class="number-large">---</div> 
+        </div>
+
+        <div class="waiting-count">
+            <div class="label">現在お待ちの組数</div>
+            <div id="waitingCount" class="number-small">--- 組</div> 
+        </div>
+
+        <div class="next-waiting">
+            <div class="label">次にお呼びする番号</div>
+            <div id="nextWaiting" class="number-small">---</div>
+        </div>
+    </div>
+
+    <script src="/static/app_display.js"></script> 
+</body>
+</html>
