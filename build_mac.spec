@@ -26,8 +26,8 @@ block_cipher = None
 
 a = Analysis(['main.py'],
              pathex=['.'],
-             binaries=[],
-             datas=datas, 
+             binaries=binaries,
+             datas=datas,
              hiddenimports=hiddenimports,
              hookspath=[],
              runtime_hooks=[],
